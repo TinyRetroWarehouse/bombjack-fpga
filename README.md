@@ -59,14 +59,14 @@ There was yet more simulator required to figure out the exact times to read the 
 
 !!Building the project
 
-The project is organised into a number of folders relative to the main project folder, all the source code lives in /source, the BJ original ROMs are expected to be in /roms/bombjack and some handy scripts live in /scripts while relevant documentation can be found in /doc. Finally the Xilinx build occurs in the /build directory which can become cluttered with temp files after each build. Feel free to delete all files in there but make sure you keep the .xise project files.
+The project is organised into a number of folders relative to the main project folder, all the source code lives in /source, the BJ original ROMs are expected to be in /roms/bombjack and some handy scripts live in /source/boards/<boardname>/scripts while relevant documentation can be found in /doc. Finally the Xilinx build occurs in the /build directory which can become cluttered with temp files after each build. Feel free to delete all files in there but make sure you keep the .xise project files.
 
 The basic steps to build this project are:
  1) copy the binary ROM files to /roms/bombjack
- 2) run /scripts/build_roms_bombjack.bat to translate the binary ROMs to VHDL code
- 3) run /build/bombjack.xise to start the Xilings ISE environment and generate the fpga bit file.
- 4) run /scripts/build_fpga_image.bat to concatenate the ROMs to the FPGA bit file
- 5) finally burn the resulting /scripts/fpga.bin file to FLASH using the command "papilio-prog.exe -b bscan_spi_lx9.bit -f fpga.bit"
+ 2) run /source/boards/<boardname>/scripts/build_roms_bombjack.bat to translate the binary ROMs to VHDL code
+ 3) run /bombjack_<boardname>.xise to start the Xilings ISE environment and generate the fpga bit file.
+ 4) run /source/boards/<boardname>/scripts/build_fpga_image.bat to concatenate the ROMs to the FPGA bit file
+ 5) finally burn the resulting /source/boards/<boardname>/scripts/fpga.bin file to FLASH using the command "papilio-prog.exe -b bscan_spi_lx9.bit -f fpga.bit"
 
 It is important to burn the fpga.bit to FLASH rather than just soft upload it to the FPGA because the game ROMs must be present inside the FLASH so that the bootstrapper can then copy them to SRAM at power on.
 
